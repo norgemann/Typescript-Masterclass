@@ -1,15 +1,17 @@
 //Numeric Enums and Reverse Mappings
 
-enum Sizes {
+const enum Sizes {
   Small,
   Medium,
   Large,
 }
-enum Sizes {
-  ExtraLarge = 3,
+let selected: Sizes = Sizes.Small;
+
+function updateSize(size: Sizes): void{
+    selected = size;
 }
 
-console.log(Sizes.Small);
-console.log(Sizes.ExtraLarge);
-console.log(Sizes[0]);
-console.log(Sizes[Sizes.Small]);
+
+updateSize(Sizes.Large);
+
+console.log(selected)
