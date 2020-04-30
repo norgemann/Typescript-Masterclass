@@ -1,18 +1,18 @@
 //Interfaces vs Type Aliases
-interface Item {
+interface Artist {
   name: string;
 }
 
-interface Artist extends Item {
-  song: string;
+
+
+class ArtistCreator {
+  constructor(public name: string) {}
+}
+//Klasa takodje moze da da strukturalne definicije(umesto interfejsa)
+function createArtist({ name }: ArtistCreator) {
+  return new ArtistCreator(name);
 }
 
-type Artist2 = { song: string } & Item;
+const artist = createArtist({ name: "Filip" });
 
-const artist: Artist = { name: "Filip", song: "lala", color: "red" };
-const artist2: Artist2 = { name: "Filip", song: "lala" };
-
-//i ovako mozes da spojis interfejse, ali ovako ne mogu type-ovi da se spoje!
-interface Artist {
-  color: string;
-}
+console.log(artist.name)
