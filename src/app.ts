@@ -1,25 +1,21 @@
-//“typeof” Type Queries
-//“keyof” Index Type Queries
-//“keyof”, Generics and Lookup Types
+//“Readonly” Mapped Type
 
-const person = {
-  name: "Marko",
-  age: 33,
-  job: true
-};
-
-const anotherPerson: Person = {
-  name: "Ivan",
-  age: 28,
-  job: true
-};
-
-type Person = typeof person;
-type PersonKeys = keyof Person;
-type PersonTypes = Person[PersonKeys];
-
-function getObjProperty<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key];
+interface Person {
+  name: string;
+  age: number;
 }
 
-console.log(getObjProperty(anotherPerson, 'job'));
+const person: Person = {
+  name: "Marko",
+  age: 33,
+};
+
+type MyReadonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+function freeze<T>(obj: T): MyReadonly<T> {
+  return Object.freeze(obj);
+}
+
+const frozenPerson = freeze(person);
