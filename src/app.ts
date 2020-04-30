@@ -1,16 +1,18 @@
-let dictionary: Record<string, MuzickeNumere> = {};
-
-interface MuzickeNumere {
-  trenutna: string;
-  sledeca: string;
+class Song {
+  constructor(public title: string, public duration: string | number) {}
 }
 
-const muzickeNumere: Record<keyof MuzickeNumere, string> = {
-  trenutna: "Voz Bajaga",
-  sledeca: "RHCP Under the bridge",
-};
+function getSongDuration(item: Song) {
+  if (typeof item.duration === "string") {
+    return item.duration;
+  }
+  const { duration } = item;
+  const minutes = Math.floor(duration / 60000);
+  const seconds = (duration / 1000) % 60;
+  return `${minutes}:${seconds}`;
+}
 
-//Numbers are transformed to String
-dictionary[0] = muzickeNumere;
-
-console.log(dictionary);
+const songDurationString = getSongDuration(new Song("LaLa", "05:31"));
+console.log(songDurationString);
+const songDurationMS = getSongDuration(new Song("LaLa", 330000));
+console.log(songDurationMS);
