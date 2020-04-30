@@ -1,4 +1,4 @@
-//Numeric Enums and Reverse Mappings
+//String Enums and Inlining Members
 
 const enum Sizes {
   Small,
