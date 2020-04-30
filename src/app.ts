@@ -1,13 +1,16 @@
-//“Pick” Mapped Type
-interface Person {
-  name: string;
-  age: number;
+let dictionary: Record<string, MuzickeNumere> = {};
+
+interface MuzickeNumere {
+  trenutna: string;
+  sledeca: string;
 }
 
-type MyPick<T, K extends keyof T> = {
-  [P in K]: T[P];
+const muzickeNumere: Record<keyof MuzickeNumere, string> = {
+  trenutna: "Voz Bajaga",
+  sledeca: "RHCP Under the bridge",
 };
 
-const person: Pick<Person, "name"> = {
-  name: "Todd"
-};
+//Numbers are transformed to String
+dictionary[0] = muzickeNumere;
+
+console.log(dictionary);
