@@ -1,21 +1,22 @@
-//“Readonly” Mapped Type
-
+//“Required” Mapped Type, +/- Modifiers
 interface Person {
-  name: string;
-  age: number;
-}
+    name: string;
+    age?: number;
+  }
+  
+  type MyRequired<T> = {
+    [P in keyof T]-?: T[P]
+  };
+  
+  function printAge(person: MyRequired<Person>) {
+    return `${person.name} is ${person.age}`;
+  }
+  
+  const person: MyRequired<Person> = {
+    name: 'Todd',
+    age: 27
+  };
+  
+  const age = printAge(person);
 
-const person: Person = {
-  name: "Marko",
-  age: 33,
-};
-
-type MyReadonly<T> = {
-  readonly [P in keyof T]: T[P];
-};
-
-function freeze<T>(obj: T): MyReadonly<T> {
-  return Object.freeze(obj);
-}
-
-const frozenPerson = freeze(person);
+  console.log(age)
