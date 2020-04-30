@@ -1,17 +1,3 @@
-//A “this” Keyword Primer
-
-function myFunc() {
-  console.log("myFunc", this);
-}
-
-myFunc();
-
-const myArrowFunc = () => {
-  console.log("myArrowFunc", this);
-};
-
-myArrowFunc();
-
 //Object literal
 
 const myObj = {
@@ -23,23 +9,60 @@ const myObj = {
   },
 };
 
-myObj.myMethod();
-myObj.myArrowMethod();
+//   myObj.myMethod();
+//   myObj.myArrowMethod();
+
+
+
+
+
+//Exploring “this” with .call, .apply and .bind
+
+// function myFunc(text1: string, text2: string) {
+//   console.log("myFunc", this, text1, text2);
+// }
+
+//rest parameter
+function myFunc(...text: string[]) {
+  console.log("myFunc", this, text);
+}
+
+//myFunc("ABC", "DEF");
+const bindFunction = myFunc.bind(myObj);
+bindFunction("ABC", "DEF");
+bindFunction("123", "456");
+bindFunction("ABC", "DEF");
+myFunc.call(myObj, "ABC", "DEF");
+myFunc.apply(myObj, ["ABC", "DEF"]);
+
+// const myArrowFunc = () => {
+//   console.log("myArrowFunc", this);
+// };
+
+//myArrowFunc();
+
+
+
+
+
+
+
+
+
+
 
 //Classes
 
-class MyClass {
-    
-  myClassMethod() {
-    console.log("My Class Method", this);
-  }
+// class MyClass {
+//   myClassMethod() {
+//     console.log("My Class Method", this);
+//   }
 
-  myArrowClassMethod = () => {
-    console.log("myArrowClassMethod", this);
-  }
+//   myArrowClassMethod = () => {
+//     console.log("myArrowClassMethod", this);
+//   };
+// }
 
-}
-
-const myClass = new MyClass();
-myClass.myClassMethod();
-myClass.myArrowClassMethod();
+// const myClass = new MyClass();
+// myClass.myClassMethod();
+// myClass.myArrowClassMethod();
