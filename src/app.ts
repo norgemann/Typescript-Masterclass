@@ -1,22 +1,13 @@
-//“Required” Mapped Type, +/- Modifiers
+//“Pick” Mapped Type
 interface Person {
-    name: string;
-    age?: number;
-  }
-  
-  type MyRequired<T> = {
-    [P in keyof T]-?: T[P]
-  };
-  
-  function printAge(person: MyRequired<Person>) {
-    return `${person.name} is ${person.age}`;
-  }
-  
-  const person: MyRequired<Person> = {
-    name: 'Todd',
-    age: 27
-  };
-  
-  const age = printAge(person);
+  name: string;
+  age: number;
+}
 
-  console.log(age)
+type MyPick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+const person: Pick<Person, "name"> = {
+  name: "Todd"
+};
