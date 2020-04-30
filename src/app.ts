@@ -1,18 +1,21 @@
 class Song {
-  constructor(public title: string, public duration: string | number) {}
+  constructor(public title: string, public duration: number) {}
 }
 
-function getSongDuration(item: Song) {
-  if (typeof item.duration === "string") {
-    return item.duration;
+class Playlist {
+  constructor(public name: string, public songs: string[]) {}
+}
+
+function getItemName(item: Song | Playlist) {
+  if (item instanceof Song) {
+    return item.title;
   }
-  const { duration } = item;
-  const minutes = Math.floor(duration / 60000);
-  const seconds = (duration / 1000) % 60;
-  return `${minutes}:${seconds}`;
+  return item.name;
 }
 
-const songDurationString = getSongDuration(new Song("LaLa", "05:31"));
-console.log(songDurationString);
-const songDurationMS = getSongDuration(new Song("LaLa", 330000));
-console.log(songDurationMS);
+const songName = getItemName(new Song("lala", 666000));
+const playlistName = getItemName(
+  new Playlist("best songs", ["lala", "u nanana"])
+);
+
+console.log(songName, playlistName);
