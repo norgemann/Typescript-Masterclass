@@ -6,8 +6,13 @@ class Playlist {
   constructor(public name: string, public songs: string[]) {}
 }
 
+//User Defined Type Guards, vazno je da vrati boolean
+function isThisASong(item: any): item is Song {
+  return item instanceof Song;
+}
+
 function getItemName(item: Song | Playlist) {
-  if (item instanceof Song) {
+  if (isThisASong(item)) {
     return item.title;
   }
   return item.name;
