@@ -1,29 +1,44 @@
-//Literal Type Guards and “in” Operator
-class Song {
-  kind: "song"; //Literal Type
-  constructor(public title: string, public duration: number) {}
+//Intersection Types
+interface Order {
+  id: string;
+  price: number;
+  currency: string;
 }
 
-class Playlist {
-  kind: "playlist"; //Literal Type
-  constructor(public name: string, public songs: string[]) {}
+interface Card {
+  cardNumber: string;
+  cvc: number;
+}
+interface Paypal {
+  email: string;
 }
 
-//“in” Operator
-function isThisASong(item: any): item is Song {
-  return "title" in item; //does this property exists in object
-}
+type CardOrder = Order & Card;
+type PaypalOrder = Order & Paypal;
 
-function getItemName(item: Song | Playlist) {
-  if (item.kind === "song") {//Literal Type Guard
-    return item.title;
-  }
-  return item.name;
-}
+const order: Order = {
+  id: "55ffg5",
+  price: 233,
+  currency: "RSD",
+};
 
-const songName = getItemName(new Song("lala", 666000));
-const playlistName = getItemName(
-  new Playlist("best songs", ["lala", "u nanana"])
+//Intersection Type
+const orderCard: CardOrder = {
+  cardNumber: "4000 52365 9658 2222",
+  cvc: 236,
+  ...order,
+};
+
+const orderPaypal: PaypalOrder = {
+  ...order,
+  email: "marko@est.com",
+};
+
+const oldWay: CardOrder & PaypalOrder = Object.assign(
+  {},
+  order,
+  orderCard,
+  orderPaypal
 );
 
-console.log(songName, playlistName);
+console.log(oldWay);

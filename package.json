@@ -3,7 +3,8 @@
   "author": "Ultimate Angular",
   "version": "0.0.0",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "push": "git push"
   },
   "devDependencies": {
     "awesome-typescript-loader": "3.4.1",
