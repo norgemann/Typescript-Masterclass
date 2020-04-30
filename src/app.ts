@@ -1,32 +1,14 @@
-//Function Generics
+//Function Overloads
+function reverse(something: string): string;
+function reverse<T>(arr: T[]): T[];
 
-class Pizza {
-  constructor(private name: string, private price: number) {}
+function reverse<T>(something: string | T[]): string | T[] {
+  if (typeof something === "string") {
+    return something.split("").reverse().join("");
+  } else return something.slice().reverse();
 }
 
-class Coupon {
-  constructor(private name: string) {}
-}
+const reversed = reverse("Pepperoni");
+const reversed2 = reverse([1,2,3]);
 
-class List<T> {
-  private list: T[] = [];
-
-  addItem(item: T): void {
-    this.list.push(item);
-  }
-
-  getList(): T[] {
-    return this.list;
-  }
-}
-
-
-const list = new List<Pizza>();
-list.addItem(new Pizza("Pepperoni", 25))
-
-const list2 = new List<Coupon>();
-list2.addItem(new Coupon("PIZZA25%"))
-
-const lists = [...list.getList(), ...list2.getList()]
-
-console.log(lists)
+console.log(reversed, reversed2);
