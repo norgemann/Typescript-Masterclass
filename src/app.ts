@@ -1,26 +1,10 @@
-//Arrow Functions and Lexical Scope
+//Typing “this” and “noImplicitThis”
 
-//Classes
+const elem = document.querySelector('.click');
 
-class MyClass {
-  myClassMethod() {
-    const foo = "foo";
-    console.log("My Class Method", this, foo);
-
-    setTimeout(function () {
-      console.log("Set Timeout", this, foo);
-    }, 0);
-
-    setTimeout(() => {
-      console.log("Set Timeout Arrow", this, foo);
-    }, 0);
-  }
-
-  // console:
-  // My Class Method MyClass {} foo
-  // Set Timeout Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …} foo
-  //Set Timeout Arrow MyClass {} foo
+function handleClick(this: HTMLAnchorElement, event: Event){
+    event.preventDefault();
+    console.log(this)
 }
 
-const myClass = new MyClass();
-myClass.myClassMethod();
+elem.addEventListener('click', handleClick, false)
