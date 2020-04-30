@@ -1,18 +1,32 @@
-//Interfaces vs Type Aliases
-interface Artist {
-  name: string;
+//Function Generics
+
+class Pizza {
+  constructor(private name: string, private price: number) {}
+}
+
+class Coupon {
+  constructor(private name: string) {}
+}
+
+class List<T> {
+  private list: T[] = [];
+
+  addItem(item: T): void {
+    this.list.push(item);
+  }
+
+  getList(): T[] {
+    return this.list;
+  }
 }
 
 
+const list = new List<Pizza>();
+list.addItem(new Pizza("Pepperoni", 25))
 
-class ArtistCreator {
-  constructor(public name: string) {}
-}
-//Klasa takodje moze da da strukturalne definicije(umesto interfejsa)
-function createArtist({ name }: ArtistCreator) {
-  return new ArtistCreator(name);
-}
+const list2 = new List<Coupon>();
+list2.addItem(new Coupon("PIZZA25%"))
 
-const artist = createArtist({ name: "Filip" });
+const lists = [...list.getList(), ...list2.getList()]
 
-console.log(artist.name)
+console.log(lists)
