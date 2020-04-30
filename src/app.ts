@@ -1,18 +1,21 @@
+//Literal Type Guards and “in” Operator
 class Song {
+  kind: "song"; //Literal Type
   constructor(public title: string, public duration: number) {}
 }
 
 class Playlist {
+  kind: "playlist"; //Literal Type
   constructor(public name: string, public songs: string[]) {}
 }
 
-//User Defined Type Guards, vazno je da vrati boolean
+//“in” Operator
 function isThisASong(item: any): item is Song {
-  return item instanceof Song;
+  return "title" in item; //does this property exists in object
 }
 
 function getItemName(item: Song | Playlist) {
-  if (isThisASong(item)) {
+  if (item.kind === "song") {//Literal Type Guard
     return item.title;
   }
   return item.name;
