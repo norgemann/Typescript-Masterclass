@@ -1,14 +1,15 @@
-//Function Overloads
-function reverse(something: string): string;
-function reverse<T>(arr: T[]): T[];
+//Numeric Enums and Reverse Mappings
 
-function reverse<T>(something: string | T[]): string | T[] {
-  if (typeof something === "string") {
-    return something.split("").reverse().join("");
-  } else return something.slice().reverse();
+enum Sizes {
+  Small,
+  Medium,
+  Large,
+}
+enum Sizes {
+  ExtraLarge = 3,
 }
 
-const reversed = reverse("Pepperoni");
-const reversed2 = reverse([1,2,3]);
-
-console.log(reversed, reversed2);
+console.log(Sizes.Small);
+console.log(Sizes.ExtraLarge);
+console.log(Sizes[0]);
+console.log(Sizes[Sizes.Small]);
