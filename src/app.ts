@@ -1,4 +1,4 @@
-//Intersection Types
+//Discriminated (Tagged) Unions
 interface Order {
   id: string;
   price: number;
@@ -8,9 +8,11 @@ interface Order {
 interface Card {
   cardNumber: string;
   cvc: number;
+  type: "type";//Discriminated (Tagged) Unions
 }
 interface Paypal {
   email: string;
+  type: "paypal";//Discriminated (Tagged) Unions
 }
 
 type CardOrder = Order & Card;
@@ -26,19 +28,25 @@ const order: Order = {
 const orderCard: CardOrder = {
   cardNumber: "4000 52365 9658 2222",
   cvc: 236,
+  type: "type",
   ...order,
 };
 
 const orderPaypal: PaypalOrder = {
   ...order,
   email: "marko@est.com",
+  type: "paypal",
 };
 
-const oldWay: CardOrder & PaypalOrder = Object.assign(
-  {},
-  order,
-  orderCard,
-  orderPaypal
-);
+type Checkout = CardOrder | PaypalOrder;//Discriminated (Tagged) Unions
 
-console.log(oldWay);
+function checkOut(order: Checkout) {
+  if (order.type === "paypal") {
+    console.log(`Paypal email ${order.email}`);
+  } else {
+    console.log(`Card number${order.cardNumber}`);
+  }
+}
+
+checkOut(orderCard);
+checkOut(orderPaypal);
