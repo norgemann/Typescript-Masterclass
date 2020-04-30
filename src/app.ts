@@ -1,10 +1,13 @@
-//Typing “this” and “noImplicitThis”
+//“typeof” Type Queries
 
-const elem = document.querySelector('.click');
+const person = {
+  name: "Marko",
+  age: 33,
+};
 
-function handleClick(this: HTMLAnchorElement, event: Event){
-    event.preventDefault();
-    console.log(this)
-}
+type Person = typeof person;
 
-elem.addEventListener('click', handleClick, false)
+const anotherPerson: Person = {
+  name: "Ivan",
+  age: 28,
+};
