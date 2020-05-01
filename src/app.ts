@@ -1,17 +1,13 @@
-//String Enums and Inlining Members
+import * as _ from "lodash";
 
-const enum Sizes {
-  Small,
-  Medium,
-  Large,
-}
-let selected: Sizes = Sizes.Small;
+_.chunk([1, 2, 3, 4], 2); //[[1,2],[3,4]]
 
-function updateSize(size: Sizes): void{
-    selected = size;
-}
+_.mixin({
+  log(item: string) {
+    console.log(":::", item);
+  },
+});
+
+_.log("Hello");
 
 
-updateSize(Sizes.Large);
-
-console.log(selected)
